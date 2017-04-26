@@ -13,11 +13,15 @@ let store = createStore(todoApp, {
   todos: defaultTodos
 })
 
+const wrapper = mount(<VisibleTodoList store={store}/>);
 
 describe("Todolist", function() {
-  it('Mount 5 Todo Items, 2 being completed', () => {
-    const wrapper = mount(<VisibleTodoList store={store}/>);
+  it('Mount 5 Todo Items', () => {
     expect(wrapper.find('li').length).to.equal(5);
+
+  })
+
+  it('Have 2 completed', () => {
     expect(wrapper.find('span.todoDetails.isCompleted').length).to.equal(2);
   })
 });
