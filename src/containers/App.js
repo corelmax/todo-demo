@@ -10,16 +10,11 @@ const cx = classNames.bind(styles);
 
 const App = () => (
   <div className={cx('container')}>
-    <div className={cx('left-cell')}>
-      <TodoApp />
-    </div>
-    <div className={cx('right-cell')}>
-      <AddTodo />
-      <hr/>
-      <h1>Todo List</h1>
-      <FilterList />
-      <VisibleTodoList />
-    </div>
+    <AddTodo />
+    <hr/>
+    <h1>Todo List</h1>
+    <FilterList />
+    <VisibleTodoList />
   </div>
 )
 

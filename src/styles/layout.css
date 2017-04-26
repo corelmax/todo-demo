@@ -2,17 +2,5 @@
   width: 100%;
   clear: both;
   display: table;
-  
-}
 
-.left-cell {
-  display: table-cell;
-  width: 50%;
-  padding: 10px;
-}
-
-.right-cell {
-  display: table-cell;
-  width: 50%;
-  padding: 10px;
 }
