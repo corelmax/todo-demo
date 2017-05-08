@@ -104,6 +104,43 @@ export function getPublicTodos() {
   }
 }
 
+export function updatePublicTodoRequest() {
+  return {
+    type: 'UPDATE_PUBLIC_TODO_REQUEST'
+  }
+}
+
+export function updatePublicTodoSuccess(id, data) {
+  return {
+    type: 'UPDATE_PUBLIC_TODO_SUCCESS',
+    id,
+    data
+  }
+}
+
+export function updatePublicTodoFailure(error) {
+  return {
+    type: 'UPDATE_PUBLIC_TODO_FAILURE',
+    error
+  }
+}
+
+export function updatePublicTodo(id, data) {
+  return (dispatch) => {
+    dispatch(updatePublicTodoRequest());
+    return todoService().updatePublicTodo({id, data})
+    .then( (res) => {
+      if (res.status === 204) {
+        return dispatch(updatePublicTodoSuccess(id, data));
+      }
+    })
+    .catch( (err) => {
+        return dispatch(updatePublicTodoFailure({ error: 'An error occured updating todo'}));
+    })
+  }
+}
+
+
 export function removePublicTodoRequest() {
   return {
     type: 'REMOVE_PUBLIC_TODO_REQUEST'

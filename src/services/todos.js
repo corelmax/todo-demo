@@ -2,24 +2,38 @@ import createRestApiClient from '../utils/RestApiClient';
 
 const apiEndpoint = 'http://todoapi1105.azurewebsites.net/api';
 
+const generateDelay = function() {
+  const min = Math.ceil(0);
+  const max = Math.floor(5000);
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 export default () => {
   const client = createRestApiClient().withConfig({ baseURL: apiEndpoint });
   return {
-    getPublicTodos: () => client.request({
-      method: 'GET',
-      url: '/todo'
-    }),
-    deletePublicTodo: ({ id }) => client.request({
-      method: 'DELETE',
-      url: `/todo/${id}`
-    }),
-    updatePublicTodo: ({ id, data }) => client.request({
-      method: 'PUT',
-      url: `/todo/${id}`,
-      data
-    }),
+    getPublicTodos: () => {
+      return client.request({
+        method: 'GET',
+        url: '/todo/?delay=' + generateDelay()
+      })
+    },
+    deletePublicTodo: ({ id }) => {
+      return client.request({
+        method: 'DELETE',
+        url: `/todo/${id}/?delay=` + generateDelay()
+      })
+    },
+    updatePublicTodo: ({ id, data }) => {
+      return client.request({
+        method: 'PUT',
+        url: `/todo/${id}/?delay=` + generateDelay(),
+        data: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    },
     createTodo: ({data}) => {
-      console.log('Checking variables here', data);
       return client.request({
         method: 'POST',
         url: `/todo/`,

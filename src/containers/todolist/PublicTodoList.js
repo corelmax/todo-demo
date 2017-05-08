@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { togglePublicTodo, removePublicTodo, getPublicTodos } from '../../actions'
+import { updatePublicTodo, removePublicTodo, getPublicTodos } from '../../actions'
 import TodoList from '../../components/todolist/TodoList';
 import AddTodo from '../../components/todolist/AddTodo';
 
@@ -64,8 +64,12 @@ const mapDispatchToProps = (dispatch) => {
     syncTodos: () => {
       dispatch(getPublicTodos());
     },
-    onTodoClick: (id) => {
-      dispatch(togglePublicTodo(id))
+    onTodoClick: (id, data) => {
+      data.isComplete = !data.completed;
+      data.key = data.id;
+      delete data.id;
+      delete data.completed;
+      dispatch(updatePublicTodo(id, data))
     },
     onRemoveTodoClick: (id) => {
       dispatch(removePublicTodo(id))

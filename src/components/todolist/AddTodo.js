@@ -17,9 +17,9 @@ let AddTodo = ({ dispatch }) => {
         }
         let data = {
           text: input.value,
-          complete: false
+          complete: false,
+          isPrivate: false
         }
-        console.log('Creating with data', data);
         dispatch(addPublicTodo(data))
         input.value = ''
       }}>
