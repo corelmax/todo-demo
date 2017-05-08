@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { toggleTodo, removeTodo, getPublicTodos } from '../../actions'
-import TodoList from '../../components/todolist/TodoList'
+import { togglePublicTodo, removePublicTodo, getPublicTodos } from '../../actions'
+import TodoList from '../../components/todolist/TodoList';
+import AddTodo from '../../components/todolist/AddTodo';
 
 import loadingImage from '../../images/hourglass.gif'
 import classNames from 'classnames/bind';
@@ -41,6 +42,7 @@ class PublicTodoList extends React.Component {
     if(isLoading) return (loadingAnim);
     return (
       <div >
+        <AddTodo />
         <TodoList todos={todos} onTodoClick={this.props.onTodoClick} onRemoveTodoClick={this.props.onRemoveTodoClick} />
       </div>
     )
@@ -63,10 +65,10 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(getPublicTodos());
     },
     onTodoClick: (id) => {
-      dispatch(toggleTodo(id))
+      dispatch(togglePublicTodo(id))
     },
     onRemoveTodoClick: (id) => {
-      dispatch(removeTodo(id))
+      dispatch(removePublicTodo(id))
     }
   }
 }

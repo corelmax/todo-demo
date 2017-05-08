@@ -9,19 +9,25 @@ export default () => {
       method: 'GET',
       url: '/todo'
     }),
-    deleteTodo: ({ id }) => client.request({
+    deletePublicTodo: ({ id }) => client.request({
       method: 'DELETE',
       url: `/todo/${id}`
     }),
-    updateTodo: ({ id, data }) => client.request({
+    updatePublicTodo: ({ id, data }) => client.request({
       method: 'PUT',
       url: `/todo/${id}`,
       data
     }),
-    createTodo: ({ id, data }) => client.request({
-      method: 'POST',
-      url: `/todo/${id}`,
-      data
-    })
+    createTodo: ({data}) => {
+      console.log('Checking variables here', data);
+      return client.request({
+        method: 'POST',
+        url: `/todo/`,
+        data: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+    }
   };
 };

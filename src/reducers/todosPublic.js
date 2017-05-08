@@ -4,9 +4,9 @@ const todo = (state = {}, action) => {
   switch (action.type) {
     case 'ADD_PUBLIC_TODO_SUCCESS':
       return {
-        //id: action.key,
-        text: action.text,
-        completed: action.isComplete
+        id: action.data.key,
+        text: action.data.text,
+        completed: action.data.isComplete
       }
     case 'TOGGLE_PUBLIC_TODO':
       if (state.id !== action.id) {
@@ -41,7 +41,7 @@ const todosPublic = (state = [], action) => {
           completed: todo.isComplete
         }
       })
-    case 'REMOVE_PUBLIC_TODO':
+    case 'REMOVE_PUBLIC_TODO_SUCCESS':
       return state.filter(t => t.id !== action.id)
     default:
       return state
