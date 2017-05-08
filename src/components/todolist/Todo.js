@@ -6,7 +6,7 @@ const cx = classNames.bind(styles);
 const Todo = ({ text, completed, onClick, onRemoveTodoClick }) => (
   <li>
        <input className={cx('todoToggle')} type="checkbox" defaultChecked={completed} onClick={onClick} />
-       <span className={cx('todoDetails', {'isCompleted': completed})}>{text}</span>
+       <span className={cx('todoDetails', {'isCompleted': completed})}  dangerouslySetInnerHTML={{ __html: text }}></span>
        <a href='#' className={cx('todoDelete')} onClick={onRemoveTodoClick}>delete</a>
   </li>
 )

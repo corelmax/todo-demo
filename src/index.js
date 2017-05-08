@@ -1,22 +1,24 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
 import { AppContainer } from 'react-hot-loader'
 import todoApp from './reducers'
+import configureStore from './store/configureStore';
+
 
 import App from 'containers/App';
 
 import {defaultTodos} from '_data';
 
 
-if(!window.initial_data || typeof window.initial_data === 'undefined') {
-  window.initial_data = {
+if(!window.__INITIAL_STATE__ || typeof window.__INITIAL_STATE__ === 'undefined') {
+  window.__INITIAL_STATE__ = {
     todos: defaultTodos
   }
 }
 
-let store = createStore(todoApp, window.initial_data)
+const initialState = window.__INITIAL_STATE__;
+const store = configureStore(initialState);
 
 const render = Component => {
   ReactDOM.render(

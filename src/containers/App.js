@@ -1,11 +1,12 @@
 import React from 'react'
 import classNames from 'classnames/bind'
-import FilterList from 'components/todolist/FilterList'
-import AddTodo from 'containers/todolist/AddTodo'
-import VisibleTodoList from 'containers/todolist/VisibleTodoList'
-import TodoApp from 'containers/todolist/TodoApp';
+import FilterList from '../components/todolist/FilterList'
+import AddTodo from './todolist/AddTodo'
+import PublicTodoList from './todolist/PublicTodoList'
+import PrivateTodoList from './todolist/PrivateTodoList'
+import TodoApp from './todolist/TodoApp';
 
-import styles from 'styles/layout.css';
+import styles from '../styles/layout.css';
 const cx = classNames.bind(styles);
 
 const App = () => (
@@ -14,7 +15,8 @@ const App = () => (
     <hr/>
     <h1>Todo List</h1>
     <FilterList />
-    <VisibleTodoList />
+    <PrivateTodoList />
+    <PublicTodoList />
   </div>
 )
 
