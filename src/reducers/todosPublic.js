@@ -41,15 +41,20 @@ const todosPublic = (state = [], action) => {
         todo(t, action)
       )
     case 'FETCH_PUBLIC_TODO_SUCCESS':
-      return action.data.map( (todo) => {
-        return {
-          id: todo.key,
-          text: todo.text,
-          completed: todo.isComplete,
-          user: todo.user,
-          isPrivate: todo.isPrivate || false
+      let publicTodos = [];
+      for(var i = 0; i < action.data.length; i++) {
+        let t = action.data[i];
+        if(t.isPrivate !== true) {
+          publicTodos.push({
+            id: t.key,
+            text: t.text,
+            completed: t.isComplete,
+            user: t.user,
+            isPrivate: t.isPrivate || false
+          });
         }
-      })
+      }
+      return publicTodos;
     case 'UPDATE_PUBLIC_TODO_SUCCESS':
       return state.map(t => todo(t, action));
     case 'REMOVE_PUBLIC_TODO_SUCCESS':
