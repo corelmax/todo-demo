@@ -4,7 +4,7 @@ const apiEndpoint = 'http://todoapi1105.azurewebsites.net/api';
 
 const generateDelay = function() {
   const min = Math.ceil(0);
-  const max = Math.floor(5000);
+  const max = Math.floor(2000);
   return Math.floor(Math.random() * (max - min)) + min;
 }
 
