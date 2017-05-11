@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { updatePublicTodo, removePublicTodo, getPublicTodos } from '../../actions'
+import { addPublicTodo, updatePublicTodo, removePublicTodo, getPublicTodos } from '../../actions'
 import TodoList from '../../components/todolist/TodoList';
 import AddTodo from '../../components/todolist/AddTodo';
-
+import FilterList from '../../components/todolist/FilterList'
+import TodoCounter from '../../components/todolist/TodoCounter'
 import loadingImage from '../../images/hourglass.gif'
 import classNames from 'classnames/bind';
 import styles from '../../styles/todolist.css';
@@ -41,15 +42,18 @@ class PublicTodoList extends React.Component {
 
     if(isLoading) return (loadingAnim);
     return (
-      <div >
-        <AddTodo />
+      <div className={cx('todoWrapper')}>
+        <h1>Public List</h1>
+        <AddTodo addTodo={this.props.addTodo} />
+        <hr />
+
+        <FilterList />
         <TodoList todos={todos} onTodoClick={this.props.onTodoClick} onRemoveTodoClick={this.props.onRemoveTodoClick} />
+        <TodoCounter todos={todos} />
       </div>
     )
   }
 }
-
-
 
 const mapStateToProps = (state) => {
   return {
@@ -61,6 +65,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    addTodo: (data) => {
+      dispatch(addPublicTodo(data));
+    },
     syncTodos: () => {
       dispatch(getPublicTodos());
     },

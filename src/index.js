@@ -21,12 +21,12 @@ const initialState = window.__INITIAL_STATE__;
 const store = configureStore(initialState);
 
 const render = Component => {
-  ReactDOM.render(
-    <Provider store={store}>
-      <AppContainer>
+  return ReactDOM.render(
+    <AppContainer>
+      <Provider store={store}>
         <Component />
-      </AppContainer>
-    </Provider>,
+      </Provider>
+    </AppContainer>,
     document.getElementById('root')
   )
 }
@@ -34,6 +34,22 @@ const render = Component => {
 render(App)
 
 if (module.hot) {
-  // Hot reloading - root module can manage depencies container within for hot reloading
-  module.hot.accept('./containers/App', () => { render(App) })
+  module.hot.accept('./reducers', () => {
+    // redux store has a method replaceReducer
+    store.replaceReducer(appReducer);
+  });
+
+  /*
+  module.hot.accept('./index.js', () => {
+    console.log('Re-rendering app');
+    render(App)
+  })
+
+  module.hot.accept('./containers/App', () => {
+    console.log('Re-rendering app');
+    render(App)
+  })
+  */
+  module.hot.accept();
+  render(App)
 }

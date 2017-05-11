@@ -19,10 +19,10 @@ let AddTodo = ({ dispatch }) => {
         dispatch(addTodo(input.value))
         input.value = ''
       }}>
-        <input className={cx('taskEntry')} ref={node => {
+        <input className={cx('todoEntry')} ref={node => {
           input = node
         }} />
-        <button type="submit">
+      <button className={cx('todoAddBtn')} type="submit">
           Add Todo
         </button>
       </form>

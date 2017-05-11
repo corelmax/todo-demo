@@ -1,4 +1,7 @@
 require('babel-register')();
+import { describe, it } from 'storybook-addon-specifications'
+import { expect } from 'chai';
+
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
@@ -14,6 +17,9 @@ const dom = new JSDOM(``, {
 
 global.document = dom.window.document;
 global.window = dom.window.document.defaultView;
+global.window.describe = describe
+global.window.it = it
+global.window.expect = expect
 
 Object.keys(document.defaultView).forEach((property) => {
   if (typeof global[property] === 'undefined') {

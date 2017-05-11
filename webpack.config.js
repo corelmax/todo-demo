@@ -21,6 +21,10 @@ module.exports = {
       { test: /\.(jpe?g|png|gif|svg)$/i, loaders: [ 'file-loader?hash=sha512&digest=hex&name=[hash].[ext]']}
     ]
   },
+  plugins: [
+    new webpack.NamedModulesPlugin(),
+    // prints more readable module names in the browser console on HMR updates
+  ],
   resolve: {
     modules: [
       path.resolve('./src'),

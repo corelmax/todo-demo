@@ -11,6 +11,7 @@ import { expect } from 'chai';
 import configureStore from '../src/store/configureStore';
 import TodoList from '../src/components/todolist/TodoList';
 import Todo from '../src/components/todolist/Todo';
+import AddTodo from '../src/components/todolist/AddTodo';
 const store = configureStore();
 
 storiesOf('Welcome', module)
@@ -19,7 +20,38 @@ storiesOf('Welcome', module)
   ));
 
 storiesOf('Todos', module)
-  .add('Populated Todo List', () => {
+  .add('Add new Todo', () => {
+    const story = (<AddTodo dispatch={{}} prefill='Moo' />)
+    return story;
+  })
+  .add('Todo - Complete', () => {
+    const todo = {id: 1, text: 'Demo Item 1', completed: true};
+    const story = (
+      <Todo
+        {...todo}
+        onClick={() => {
+          action('Click on the Todo Click')
+        }}
+        onRemoveTodoClick={() => {
+          action('Clicked on Remove')
+        }}
+      />
+    )
+
+    specs(() => describe('Completed Todo', function () {
+      it('Should have the text of ' + todo.text, function () {
+        let output = mount(story);
+        expect(output.find('span').text()).to.equal(todo.text);
+      });
+      it('Should be selected', function () {
+        let output = mount(story);
+        expect(output.find('[defaultChecked=true]').length).to.equal(1);
+      });
+    }));
+
+    return story;
+  })
+  .add('Populated List', () => {
     const todos =  [
       {id: 1, text: 'Demo Item 1', completed: false},
       {id: 2, text: 'Demo Item 2', completed: false},
@@ -47,34 +79,6 @@ storiesOf('Todos', module)
       it('Should have 2 selected Items', function () {
         let output = mount(story);
         expect(output.find('[defaultChecked=true]').length).to.equal(2);
-      });
-    }));
-
-    return story;
-  })
-  .add('Todo - Complete', () => {
-    const todo = {id: 1, text: 'Demo Item 1', completed: true};
-
-    const story = (
-      <Todo
-        {...todo}
-        onClick={() => {
-          action('Click on the Todo Click')
-        }}
-        onRemoveTodoClick={() => {
-          action('Clicked on Remove')
-        }}
-      />
-    )
-
-    specs(() => describe('Has 5 items', function () {
-      it('Should have the text of ' + todo.text, function () {
-        let output = mount(story);
-        expect(output.find('span').text()).to.equal(todo.text);
-      });
-      it('Should be selected', function () {
-        let output = mount(story);
-        expect(output.find('[defaultChecked=true]').length).to.equal(1);
       });
     }));
 

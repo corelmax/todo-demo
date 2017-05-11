@@ -2,5 +2,14 @@
   width: 100%;
   clear: both;
   display: table;
+}
 
+.left-col {
+  width: 50%;
+  float: left;
+}
+
+.right-col {
+  width: 50%;
+  float: left;
 }

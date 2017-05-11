@@ -1,13 +1,12 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { addPublicTodo } from '../../actions'
 import classNames from 'classnames/bind';
 import styles from '../../styles/todolist.css';
 
 const cx = classNames.bind(styles);
 
-let AddTodo = ({ dispatch }) => {
-  let input
+
+const AddTodo = ({addTodo}) => {
+  let input;
   return (
     <div>
       <form onSubmit={e => {
@@ -20,19 +19,18 @@ let AddTodo = ({ dispatch }) => {
           complete: false,
           isPrivate: false
         }
-        dispatch(addPublicTodo(data))
+        addTodo(data);
         input.value = ''
       }}>
-        <input className={cx('taskEntry')} ref={node => {
+        <input className={cx('todoEntry')} ref={node => {
           input = node
         }} />
-        <button type="submit">
+        <button className={cx('todoAddBtn')} type="submit">
           Add Todo
         </button>
       </form>
     </div>
   )
 }
-AddTodo = connect()(AddTodo)
 
-export default AddTodo
+export default AddTodo;

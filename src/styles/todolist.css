@@ -1,3 +1,10 @@
+.todoWrapper {
+  border: 2px solid black;
+  margin: 10px;
+  padding: 18px;
+  min-height: 460px;
+}
+
 .todolist {
   list-style: none;
   margin: 20px 0 20px;
@@ -5,7 +12,7 @@
 }
 
 .todoDetails {
-  width: 400px;
+  width: 500px;
   display: inline-block;
 }
 
@@ -28,6 +35,17 @@
   text-transform: capitalize;
 }
 
-.taskEntry {
-  margin-right: 20px;
+.todoEntry {
+  margin-right: 5%;
+  width: 75%;
+}
+
+.todoAddBtn {
+  width: 20%;
+  background-color: white;
+}
+
+
+.counter {
+  font-size: 18px;
 }
